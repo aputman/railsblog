@@ -1,0 +1,31 @@
+p#notice= notice
+h1
+  = @user.name
+  ', 
+  = @user.age
+
+h2 Posts
+
+- @user.posts.each do |post|
+  p
+    strong 
+      = link_to post.title, post_path(post)
+  p
+    = post.body
+
+h3 Comments
+
+- @user.comments.each do |comment|
+  p
+    strong
+      = link_to comment.post.title, post_path(comment.post)
+      '  by 
+      = link_to comment.post.user.name, user_path(comment.post.user)
+  'commented: 
+  = comment.body
+br
+br
+br
+= link_to 'Edit', edit_user_path(@user)
+', 
+= link_to 'Back', users_path
